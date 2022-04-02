@@ -14,25 +14,14 @@ import uvicorn
 from fastapi import FastAPI
 
 # ---local library---
-import config
-from util.dbconnect import DatabaseConnect
 from core.chatdataextractor import ChatDataExtractor
 
 app = FastAPI()
 
-@app.get('/')
-def root():
-    cde = ChatDataExtractor()
-    return {'items':cde.search_chat('くしゃみ')}
-
-@app.get('/serch/keyword')
+@app.get('/search/keyword')
 async def search_from_word(channel_id: str='', keyword: str='', minscore: int=0):
     cde = ChatDataExtractor()
     res = {}
-    result = []
-    # video_ids = cde.search_video(keyword=keyword)
-    # for video_id in video_ids:
-    #     result.extend(cde.extract_from_keyword(video_id=video_id, keyword=keyword, minscore=minscore))
     result = cde.search_chat(keyword=keyword, minscore=minscore)
     print(result[0]['datetime'])
     res['items'] = sorted(result, key=lambda r: r['datetime'])
