@@ -1,0 +1,9 @@
+#VSCode
+*.workspace
+
+# Python
+.venv
+__pycache__
+
+# log
+log/
