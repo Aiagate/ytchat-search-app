@@ -22,7 +22,9 @@ class DatabaseConnect(object):
                 user=config.DATABASE_USER,
                 password=config.DATABASE_PASSWORD,
                 database=self.db,
-                use_pure=True
+                use_pure=True,
+                auth_plugin="mysql_native_password",
+                charset='utf8mb4'
             )
             self.cursor = self.cnx.cursor(buffered=True)
         except Exception as e:
